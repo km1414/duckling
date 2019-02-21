@@ -573,6 +573,14 @@ interval' intervalType (TimeData p1 _ g1 _ _ _ _ _ _, TimeData p2 _ g2 _ _ _ _ _
         | g1 == g2 && g1 == TG.Day = TTime.Closed
         | otherwise = intervalType
 
+-- Vishal: added for weekend logic because I'm not sure how intervalType' is used in interval' above
+intervalWithType' :: TTime.TimeIntervalType -> (TimeData, TimeData) -> TimeData
+intervalWithType' intervalType (TimeData p1 _ g1 _ _ _ _ _ _, TimeData p2 _ g2 _ _ _ _ _ _) =
+  TTime.timedata'
+    { TTime.timePred = mkTimeIntervalsPredicate intervalType p1 p2
+    , TTime.timeGrain = min g1 g2
+    }
+
 interval :: TTime.TimeIntervalType -> TimeData -> TimeData -> Maybe TimeData
 interval intervalType td1 td2 =
   case interval' intervalType (td1, td2) of
@@ -649,18 +657,16 @@ withDirection :: TTime.IntervalDirection -> TimeData -> TimeData
 withDirection dir td = td {TTime.direction = Just dir}
 
 longWEBefore :: TimeData -> TimeData
-longWEBefore monday = interval' TTime.Open (start, end)
+longWEBefore monday = intervalWithType' TTime.Open (sat, mon)
   where
-    start = intersect' (fri, hour False 18)
-    end = intersect' (tue, hour False 0)
-    fri = cycleNthAfter False TG.Day (- 3) monday
-    tue = cycleNthAfter False TG.Day 1 monday
+    sat = cycleNthAfter False TG.Day (- 2) monday
+    mon = cycleNthAfter False TG.Day 1 monday
 
 weekend :: TimeData
-weekend = interval' TTime.Open (fri, mon)
+weekend = intervalWithType' TTime.Open (sat, mon)
   where
-    fri = intersect' (dayOfWeek 5, hour False 18)
-    mon = intersect' (dayOfWeek 1, hour False 0)
+    sat = dayOfWeek 6
+    mon = dayOfWeek 1
 
 workweek :: TimeData
 workweek = interval' TTime.Open (mon, fri)

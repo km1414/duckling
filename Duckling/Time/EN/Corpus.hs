@@ -936,7 +936,7 @@ allExamples = concat
              , "today evening"
              , "tonight"
              ]
-  , examples (datetimeInterval ((2013, 2, 8, 18, 0, 0), (2013, 2, 11, 0, 0, 0)) Hour)
+  , examples (datetimeInterval ((2013, 2, 9, 0, 0, 0), (2013, 2, 11, 0, 0, 0)) Day)
              [ "this past weekend"
              ]
   , examples (datetimeInterval ((2013, 2, 13, 18, 0, 0), (2013, 2, 14, 0, 0, 0)) Hour)
@@ -949,7 +949,7 @@ allExamples = concat
   , examples (datetimeInterval ((2013, 2, 11, 18, 0, 0), (2013, 2, 12, 0, 0, 0)) Hour)
              [ "yesterday evening"
              ]
-  , examples (datetimeInterval ((2013, 2, 15, 18, 0, 0), (2013, 2, 18, 0, 0, 0)) Hour)
+  , examples (datetimeInterval ((2013, 2, 16, 0, 0, 0), (2013, 2, 18, 0, 0, 0)) Day)
              [ "this week-end"
              ]
   , examples (datetimeInterval ((2013, 2, 18, 4, 0, 0), (2013, 2, 18, 12, 0, 0)) Hour)
@@ -1321,7 +1321,7 @@ allExamples = concat
   , examples (datetimeInterval ((2013, 3, 21, 0, 0, 0), (2013, 4, 1, 0, 0, 0)) Day)
              [ "late March"
              ]
-  , examples (datetimeInterval ((2013, 10, 25, 18, 0, 0), (2013, 10, 28, 0, 0, 0)) Hour)
+  , examples (datetimeInterval ((2013, 10, 26, 0, 0, 0), (2013, 10, 28, 0, 0, 0)) Day)
              [ "last weekend of October"
              , "last week-end in October"
              , "last week end of October"
@@ -1332,10 +1332,10 @@ allExamples = concat
   , examples (datetimeInterval ((2013, 2, 12, 0, 0, 0), (2013, 2, 17, 0, 0, 0)) Day)
              [ "rest of the week"
              ]
-  , examples (datetimeInterval ((2013, 7, 26, 18, 0, 0), (2013, 7, 29, 0, 0, 0)) Hour)
+  , examples (datetimeInterval ((2013, 7, 27, 0, 0, 0), (2013, 7, 29, 0, 0, 0)) Day)
              [ "last wkend of July"
              ]
-  , examples (datetimeInterval ((2017, 10, 27, 18, 0, 0), (2017, 10, 30, 0, 0, 0)) Hour)
+  , examples (datetimeInterval ((2017, 10, 28, 0, 0, 0), (2017, 10, 30, 0, 0, 0)) Day)
              [ "last weekend of October 2017"
              ]
   , examples (datetimeInterval ((2013, 8, 27, 0, 0, 0), (2013, 8, 30, 0, 0, 0)) Day)

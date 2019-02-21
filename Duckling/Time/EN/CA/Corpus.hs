@@ -135,7 +135,7 @@ allExamples = concat
              [ "labor day of last year"
              , "Labour Day 2012"
              ]
-  , examples (datetimeIntervalHoliday ((2013, 8, 30, 18, 0, 0), (2013, 9, 3, 0, 0, 0)) Hour "Labour Day weekend")
+  , examples (datetimeIntervalHoliday ((2013, 8, 31, 0, 0, 0), (2013, 9, 3, 0, 0, 0)) Day "Labour Day weekend")
              [ "labor day weekend"
              ]
   , examples (datetimeHoliday (2013, 2, 2, 0, 0, 0) Day "Groundhog Day")

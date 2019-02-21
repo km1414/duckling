@@ -74,7 +74,7 @@ allExamples = concat
              [ "last memorial day"
              , "memorial day of last year"
              ]
-  , examples (datetimeIntervalHoliday ((2013, 5, 24, 18, 0, 0), (2013, 5, 28, 0, 0, 0)) Hour "Memorial Day weekend")
+  , examples (datetimeIntervalHoliday ((2013, 5, 25, 0, 0, 0), (2013, 5, 28, 0, 0, 0)) Day "Memorial Day weekend")
              [ "memorial day week-end"
              ]
   , examples (datetimeHoliday (2013, 7, 4, 0, 0, 0) Day "Independence Day")
@@ -134,7 +134,7 @@ allExamples = concat
              [ "labor day of last year"
              , "Labor Day 2012"
              ]
-  , examples (datetimeIntervalHoliday ((2013, 8, 30, 18, 0, 0), (2013, 9, 3, 0, 0, 0)) Hour "Labor Day weekend")
+  , examples (datetimeIntervalHoliday ((2013, 8, 31, 0, 0, 0), (2013, 9, 3, 0, 0, 0)) Day "Labor Day weekend")
              [ "labor day weekend"
              ]
   , examples (datetimeHoliday (2013, 2, 2, 0, 0, 0) Day "Groundhog Day")
