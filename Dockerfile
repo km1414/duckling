@@ -1,4 +1,5 @@
-FROM haskell:8 AS builder
+# syntax=docker/dockerfile:experimental
+FROM haskell:8.0.2 AS builder
 
 RUN apt-get update -qq && \
   apt-get install -qq -y libpcre3 libpcre3-dev build-essential --fix-missing --no-install-recommends && \
@@ -9,9 +10,10 @@ RUN mkdir /log
 
 WORKDIR /duckling
 
+ADD duckling.cabal .
 ADD stack.yaml .
 
-RUN stack setup
+RUN stack install --only-dependencies
 
 ADD . .
 
@@ -19,7 +21,11 @@ ADD . .
 # in parallel. However, this can cause OOM issues as the linking step
 # in GHC can be expensive. If the build fails, try specifying the
 # '-j1' flag to force the build to run sequentially.
-RUN stack install
+RUN --mount=type=cache,target=/duckling/.stack-work stack build
+RUN --mount=type=cache,target=/duckling/.stack-work stack install
+
+FROM builder AS tester
+RUN --mount=type=cache,target=/duckling/.stack-work stack test
 
 FROM debian:stretch
 
