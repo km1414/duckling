@@ -78,6 +78,51 @@ ruleIntersectYear = Rule
       _ -> Nothing
   }
 
+ruleYYYYNamedMonth :: Rule
+ruleYYYYNamedMonth = Rule
+  { name = "<year> <named-month>"
+  , pattern =
+    [ Predicate $ isIntegerBetween (2000) 3000
+    , Predicate isAMonth
+    ]
+  , prod = \tokens -> case tokens of
+      (token:Token Time td:_) -> do
+        y <- getIntValue token
+        Token Time . notLatent <$> intersect td (year y)
+      _ -> Nothing
+  }
+
+ruleAbsorbInYYYYNamedMonth :: Rule
+ruleAbsorbInYYYYNamedMonth = Rule
+  { name = "<year> <named-month>"
+  , pattern =
+    [ regex "in"
+    , Predicate $ isIntegerBetween (2000) 3000
+    , Predicate isAMonth
+    ]
+  , prod = \tokens -> case tokens of
+      (_:token:Token Time td:_) -> do
+        y <- getIntValue token
+        Token Time . notLatent <$> intersect td (year y)
+      _ -> Nothing
+  }
+
+ruleYYYYNamedMonthDOM :: Rule
+ruleYYYYNamedMonthDOM = Rule
+  { name = "<year> <named-month> <day-of-month>"
+  , pattern =
+    [ Predicate $ isIntegerBetween (2000) 3000
+    , Predicate isAMonth
+    , Predicate isDOMValue
+    ]
+  , prod = \tokens -> case tokens of
+      (token:Token Time td:td2:_) -> do
+        intVal <- getIntValue token
+        dom <- intersectDOM td td2
+        Token Time . notLatent <$> intersect dom (year intVal)
+      _ -> Nothing
+  }
+
 ruleAbsorbOnDay :: Rule
 ruleAbsorbOnDay = Rule
   { name = "on <day>"
@@ -834,7 +879,7 @@ ruleYYYYMMDD :: Rule
 ruleYYYYMMDD = Rule
   { name = "yyyy-mm-dd"
   , pattern =
-    [ regex "(\\d{2,4})-(0?[1-9]|1[0-2])-(3[01]|[12]\\d|0?[1-9])"
+    [ regex "(\\d{2,4})[- ./](0?[1-9]|1[0-2])[- ./](3[01]|[12]\\d|0?[1-9])"
     ]
   , prod = \case
       (Token RegexMatch (GroupMatch (yy:mm:dd:_)):_) -> do
@@ -2413,6 +2458,7 @@ rules =
   [ ruleIntersect
   , ruleIntersectOf
   , ruleIntersectYear
+  , ruleAbsorbInYYYYNamedMonth
   , ruleAbsorbOnDay
   , ruleAbsorbOnADOW
   , ruleAbsorbInMonthYear
@@ -2465,7 +2511,9 @@ rules =
   , ruleQuarterAfterHOD
   , ruleHalfHOD
   , ruleYYYYQQ
+  , ruleYYYYNamedMonth
   , ruleYYYYMM
+  , ruleYYYYNamedMonthDOM
   , ruleYYYYMMDD
   , ruleMMYYYY
   , ruleNoonMidnightEOD

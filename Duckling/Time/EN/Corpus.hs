@@ -252,6 +252,11 @@ allExamples = concat
              , "3/3/15"
              , "2015-3-3"
              , "2015-03-03"
+             , "2015 03 03"
+             , "2015.03.03"
+             , "2015/03/03"
+             , "2015 march 3"
+             , "on 2015 march 3rd"
              ]
   , examples (datetime (2013, 2, 15, 0, 0, 0) Day)
              [ "on the 15th"
@@ -275,6 +280,9 @@ allExamples = concat
              ]
   , examples (datetime (2014, 10, 1, 0, 0, 0) Month)
              [ "October 2014"
+             , "2014 october"
+             , "in 2014 october"
+             , "2014 oct"
              , "2014-10"
              , "2014/10"
              ]
