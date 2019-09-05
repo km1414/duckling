@@ -1112,7 +1112,7 @@ ruleIntervalMonthDDDD = Rule
   , pattern =
     [ Predicate isAMonth
     , Predicate isDOMValue
-    , regex "\\-|to|th?ru|through|(un)?til(l)?"
+    , regex "\\-|/|to|th?ru|through|(un)?til(l)?"
     , Predicate isDOMValue
     ]
   , prod = \tokens -> case tokens of
@@ -1152,10 +1152,10 @@ ruleIntervalFromMonthDDDD :: Rule
 ruleIntervalFromMonthDDDD = Rule
   { name = "from <month> dd-dd (interval)"
   , pattern =
-    [ regex "from"
+    [ regex "from|between"
     , Predicate isAMonth
     , Predicate isDOMValue
-    , regex "\\-|to|th?ru|through|(un)?til(l)?"
+    , regex "\\-|and|to|th?ru|through|(un)?til(l)?"
     , Predicate isDOMValue
     ]
   , prod = \tokens -> case tokens of
@@ -1225,7 +1225,7 @@ ruleIntervalDash = Rule
   { name = "<datetime> - <datetime> (interval)"
   , pattern =
     [ Predicate isNotLatent
-    , regex "\\-|to|th?ru|through|(un)?til(l)?"
+    , regex "\\-|and|to|th?ru|through|(un)?til(l)?"
     , Predicate isNotLatent
     ]
   , prod = \tokens -> case tokens of
