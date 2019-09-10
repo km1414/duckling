@@ -27,6 +27,14 @@ allExamples = concat
              , "2-15"
              , "2 - 15"
              ]
+  -- GB
+  , examples (datetime (2013, 2, 15, 0, 0, 0) Day)
+             [ "15/2"
+             , "on 15/2"
+             , "15 / 2"
+             , "15-2"
+             , "15 - 2"
+             ]
   , examples (datetime (1974, 10, 31, 0, 0, 0) Day)
              [ "10/31/1974"
              , "10/31/74"
@@ -34,8 +42,27 @@ allExamples = concat
              , "10.31.1974"
              , "10 31 1974"
              ]
+  -- GB
+  , examples (datetime (1974, 10, 31, 0, 0, 0) Day)
+             [ "31/10/1974"
+             , "31/10/74"
+             , "31-10-74"
+             , "31.10.1974"
+             , "31 10 1974"
+             ]
   , examples (datetime (2013, 4, 25, 16, 0, 0) Minute)
              [ "4/25 at 4:00pm"
+             ]
+  -- GB
+  , examples (datetime (2013, 4, 25, 16, 0, 0) Minute)
+             [ "25/4 at 4:00pm"
+             ]
+  , examples (datetime (2013, 2, 3, 0, 0, 0) Day)
+             [ "2/3"
+             , "on 2/3"
+             , "2 / 3"
+             , "2-3"
+             , "2 - 3"
              ]
   , examples (datetimeHoliday (2013, 11, 28, 0, 0, 0) Day "Thanksgiving Day")
              [ "thanksgiving day"
